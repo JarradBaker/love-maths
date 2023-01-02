@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     }
 
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    });
+
     runGame("addition");
 });
 
@@ -22,6 +28,11 @@ document.addEventListener("DOMContentLoaded", function() {
  * and after the user's answer has been processed.
  */
 function runGame(gameType) {
+    // Clears the answer box
+    document.getElementById('answer-box').value = "";
+    // Sets the focus so the answer box is already selected
+    document.getElementById('answer-box').focus();
+
     // Creates 2 random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
@@ -110,8 +121,8 @@ function displayAdditionQuestion(operand1, operand2) {
 }
 
 function displaySubtractQuestion(operand1, operand2) {
-    document.getElementById('operand1').textContent = operand1;
-    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
     document.getElementById('operator').textContent = "-";
 }
 
